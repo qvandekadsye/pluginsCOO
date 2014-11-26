@@ -2,6 +2,6 @@ Tanghe :
 - TimerActionListener
 
 Van de Kadsye :
-- FilenameListener → déjà implémenté dans java.io.File ?
+- FilenameFilter → déjà implémenté dans java.io.File ?
 - PluginFinder
 - PluginFilter
