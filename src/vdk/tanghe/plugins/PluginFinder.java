@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
+import vdk.tanghe.listeners.PluginListener;
+
 /**
  * The <code>PluginFinder</code> class looks for the new files stored in the
  * plugins directory and perform them.
+ * To launch the surveillance of the directory, you must call the <code>start()</code>
+ * method.
  */
 public class PluginFinder {
 	
@@ -17,7 +21,7 @@ public class PluginFinder {
 	protected File dir;
 	protected Timer timer;
 	protected List<PluginListener> listeners;
-	
+	protected PluginFilter filter;
 	
 	/**
 	 * Constructor
@@ -26,6 +30,7 @@ public class PluginFinder {
 	public PluginFinder(String dirName) {
 		
 		dir = new File(dirName);
+		filter = new PluginFilter();
 		
 		memory = new ArrayList<String>();
 		listeners = new ArrayList<PluginListener>();
@@ -37,20 +42,34 @@ public class PluginFinder {
 	}
 	
 	/**
-	 * Launches the lookup of the directory.
+	 * Launches the surveillance of the directory.
 	 */
 	public void start() {
 		
+		timer.start();
+		
 	}
 	
+	/**
+	 * Stops the surveillance of the directory
+	 */
+	public void stop() {
+		
+		timer.stop();
+		
+	}
+	
+	/**
+	 * @return a list of the class files available in the directory.
+	 */
 	public List<String> getClassFiles() {
 
 		List<String> classFiles = new ArrayList<String>();
 		
-		for(String file : memory) {
+		for(String fileName : memory) {
 			
-			if(file.endsWith(".class"))
-				classFiles.add(file);
+			if(filter.accept(dir, fileName))
+				classFiles.add(fileName);
 			
 		}
 		
@@ -58,18 +77,34 @@ public class PluginFinder {
 		
 	}
 	
+	/**
+	 * Adds <code>l</code> to a list of plugins to listen
+	 * @param l the plugin to listen
+	 */
 	public void addPluginListener(PluginListener l) {
 		
 	}
 	
+	/**
+	 * Removes <code>l</code> from the list of plugins to listen
+	 * @param l the plugin to remove
+	 */
 	public void removePluginListener(PluginListener l) {
 		
 	}
 	
+	/**
+	 * This method is fired when a plugin is added to the directory
+	 * @param name
+	 */
 	protected void firePluginAdded(String name) {
 		
 	}
 
+	/**
+	 * This method is fired when a plugin is removed from the directory
+	 * @param name
+	 */
 	protected void firePluginRemoved(String name) {
 		
 	}
