@@ -1,0 +1,6 @@
+Voir la doc de java.lang.Class<T> :
+	- isAssignableFrom()
+	- forName()
+	- getConstructor()
+	- newInstance()
+	- getPackage()
