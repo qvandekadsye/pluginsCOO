@@ -8,7 +8,7 @@ public class PluginFilter implements java.io.FilenameFilter{
 		
 	}
 	
-	public PluginFilter getInstance()
+	public static PluginFilter getInstance()
 	{
 		return new PluginFilter();
 	}
