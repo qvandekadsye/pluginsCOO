@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.Timer;
 
 import vdk.tanghe.exception.PluginListenerNotListened;
+import vdk.tanghe.listeners.PluginEvent;
 import vdk.tanghe.listeners.PluginListener;
 
 /**
@@ -31,7 +32,7 @@ public class PluginFinder {
 	public PluginFinder(String dirName) {
 		
 		dir = new File(dirName);
-		filter = new PluginFilter();
+		filter = PluginFilter.getInstance();
 		
 		memory = new ArrayList<String>();
 		listeners = new ArrayList<PluginListener>();
@@ -47,7 +48,8 @@ public class PluginFinder {
 	 */
 	public void start() {
 		
-		timer.start();
+		while(true)
+			timer.start();
 		
 	}
 	
@@ -91,7 +93,7 @@ public class PluginFinder {
 	/**
 	 * Removes <code>l</code> from the list of plugins to listen
 	 * @param l the plugin to remove
-	 * @throws PluginListenerNotListened thrown if <code>l</code> was not in 
+	 * @throws PluginListenerNotListened thrown if <code>l</code> was not in the list of the plugins to listen
 	 */
 	public void removePluginListener(PluginListener l) throws PluginListenerNotListened {
 		
@@ -108,6 +110,12 @@ public class PluginFinder {
 	 */
 	protected void firePluginAdded(String name) {
 		
+		for(PluginListener l : listeners) {
+			
+			l.pluginAdded(new PluginEvent(name));
+			
+		}
+		
 	}
 
 	/**
@@ -115,6 +123,9 @@ public class PluginFinder {
 	 * @param name
 	 */
 	protected void firePluginRemoved(String name) {
+		
+		for(PluginListener l : listeners)
+			l.pluginRemoved(new PluginEvent(name));
 		
 	}
 	
@@ -131,13 +142,15 @@ public class PluginFinder {
 		public void actionPerformed(ActionEvent e) {
 			
 			List<String> plugins = PluginFinder.this.getClassFiles();
+			List<String> filesInDir = getFilesInDir();
 			
 			// Checking new files
-			for(String p : plugins) {
+			for(String p : filesInDir) {
 				
 				if(!memory.contains(p)) {
 					
 					// New file, adding to the memory
+					System.out.println("   New file found: "+p);
 					memory.add(p);
 					firePluginAdded(p);
 					
@@ -145,19 +158,40 @@ public class PluginFinder {
 				
 			}
 			
+			List<String> instantMemory = new ArrayList<String>(memory);
+			
 			// Checking disappearing files 
 			for(String p : memory) {
 				
-				if(!plugins.contains(p)) {
+				if(!filesInDir.contains(p)) {
 					
 					// File removed, removing it from the memory
-					memory.remove(p);
+					System.out.println("   File "+p+" removed");
+					instantMemory.remove(p);
 					firePluginRemoved(p);
 					
 				}
 				
 			}
 			
+			memory = new ArrayList<String>(instantMemory);
+			
+		}
+
+		/**
+		 * @return the list of files contained in the directory
+		 */
+		protected List<String> getFilesInDir() {
+			
+			List<String> files = new ArrayList<String>();
+			
+			for(String file : PluginFinder.this.dir.list()) {
+				
+				files.add(file);
+				
+			}
+			
+			return files;
 		}
 		
 	}
