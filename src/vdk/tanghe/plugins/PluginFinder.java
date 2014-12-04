@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
+import vdk.tanghe.exception.PluginListenerNotListened;
 import vdk.tanghe.listeners.PluginListener;
 
 /**
@@ -83,13 +84,21 @@ public class PluginFinder {
 	 */
 	public void addPluginListener(PluginListener l) {
 		
+		listeners.add(l);
+		
 	}
 	
 	/**
 	 * Removes <code>l</code> from the list of plugins to listen
 	 * @param l the plugin to remove
+	 * @throws PluginListenerNotListened thrown if <code>l</code> was not in 
 	 */
-	public void removePluginListener(PluginListener l) {
+	public void removePluginListener(PluginListener l) throws PluginListenerNotListened {
+		
+		if(!listeners.contains(l))
+			throw new PluginListenerNotListened();
+		
+		listeners.remove(l);
 		
 	}
 	
@@ -109,8 +118,15 @@ public class PluginFinder {
 		
 	}
 	
+	/**
+	 * The listener used by the timer
+	 */
 	protected class TimerActionListener implements ActionListener {
 
+		/**
+		 * Action performed at every timeout.
+		 * @param e is an unused parameter. Use <code>NULL</code> value.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
