@@ -13,6 +13,9 @@ public class Main {
 		
 		System.out.print("Dossier à surveiller : ");
 		String path = sc.next();
+		/*
+		 * TODO : Implémenter un selecteur de dossier.
+		 */
 		
 		PluginFinder pluginFinder = new PluginFinder(path);
 		
