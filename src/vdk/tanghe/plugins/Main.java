@@ -16,7 +16,6 @@ public class Main {
 		/*
 		 * TODO : Implémenter un selecteur de dossier.
 		 */
-		
 		PluginFinder pluginFinder = new PluginFinder(path);
 		
 		System.out.println("Plugins finder");

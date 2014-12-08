@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.Timer;
 
 import vdk.tanghe.exception.PluginListenerNotListened;
+import vdk.tanghe.listeners.PluginAddedLogger;
 import vdk.tanghe.listeners.PluginEvent;
 import vdk.tanghe.listeners.PluginListener;
 
@@ -21,6 +22,7 @@ public class PluginFinder {
 	
 	protected List<String> memory;
 	protected File dir;
+	protected String dirName;
 	protected Timer timer;
 	protected List<PluginListener> listeners;
 	protected PluginFilter filter;
@@ -31,6 +33,7 @@ public class PluginFinder {
 	 */
 	public PluginFinder(String dirName) {
 		
+		this.dirName = dirName;
 		dir = new File(dirName);
 		filter = PluginFilter.getInstance();
 		
@@ -116,6 +119,9 @@ public class PluginFinder {
 			
 		}
 		
+		PluginAddedLogger logger = new PluginAddedLogger();
+		logger.pluginAdded(new PluginEvent(name));
+		
 	}
 
 	/**
@@ -126,6 +132,9 @@ public class PluginFinder {
 		
 		for(PluginListener l : listeners)
 			l.pluginRemoved(new PluginEvent(name));
+		
+		PluginAddedLogger logger = new PluginAddedLogger();
+		logger.pluginRemoved(new PluginEvent(name));
 		
 	}
 	
@@ -141,7 +150,6 @@ public class PluginFinder {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			List<String> plugins = PluginFinder.this.getClassFiles();
 			List<String> filesInDir = getFilesInDir();
 			
 			// Checking new files
@@ -152,7 +160,11 @@ public class PluginFinder {
 					// New file, adding to the memory
 					System.out.println("   New file found: "+p);
 					memory.add(p);
-					firePluginAdded(p);
+					
+					File f = new File(PluginFinder.this.dirName+"/"+p);
+					
+					if(filter.accept(f, p))
+						firePluginAdded(p);
 					
 				}
 				
@@ -168,7 +180,9 @@ public class PluginFinder {
 					// File removed, removing it from the memory
 					System.out.println("   File "+p+" removed");
 					instantMemory.remove(p);
-					firePluginRemoved(p);
+					
+					//if(PluginFinder.this.contains(p))
+						firePluginRemoved(p);
 					
 				}
 				
