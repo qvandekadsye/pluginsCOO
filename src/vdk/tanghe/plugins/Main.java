@@ -1,5 +1,7 @@
 package vdk.tanghe.plugins;
 
+import java.util.Scanner;
+
 public class Main {
 
 	/**
@@ -7,7 +9,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		PluginFinder pluginFinder = new PluginFinder("/home/l3/tanghe/dropins");
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Dossier à surveiller : ");
+		String path = sc.next();
+		
+		PluginFinder pluginFinder = new PluginFinder(path);
 		
 		System.out.println("Plugins finder");
 		
