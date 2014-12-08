@@ -26,12 +26,15 @@ public class PluginFinder {
 	protected Timer timer;
 	protected List<PluginListener> listeners;
 	protected PluginFilter filter;
+	protected PluginAddedLogger logger;
 	
 	/**
 	 * Constructor
 	 * @param dirName the directory which will be explored to look for changes
 	 */
 	public PluginFinder(String dirName) {
+
+		logger = new PluginAddedLogger();
 		
 		this.dirName = dirName;
 		dir = new File(dirName);
@@ -113,14 +116,13 @@ public class PluginFinder {
 	 */
 	protected void firePluginAdded(String name) {
 		
+		PluginEvent e = new PluginEvent(name);
+		
 		for(PluginListener l : listeners) {
 			
-			l.pluginAdded(new PluginEvent(name));
+			l.pluginAdded(e);
 			
 		}
-		
-		PluginAddedLogger logger = new PluginAddedLogger();
-		logger.pluginAdded(new PluginEvent(name));
 		
 	}
 
@@ -130,11 +132,14 @@ public class PluginFinder {
 	 */
 	protected void firePluginRemoved(String name) {
 		
-		for(PluginListener l : listeners)
-			l.pluginRemoved(new PluginEvent(name));
+		PluginEvent e = new PluginEvent(name);
 		
-		PluginAddedLogger logger = new PluginAddedLogger();
-		logger.pluginRemoved(new PluginEvent(name));
+		System.out.println(listeners.size());
+		
+		for(PluginListener l : listeners) {
+			if(l.isKnown(e))
+				l.pluginRemoved(e);
+		}
 		
 	}
 	
@@ -181,8 +186,8 @@ public class PluginFinder {
 					System.out.println("   File "+p+" removed");
 					instantMemory.remove(p);
 					
-					//if(PluginFinder.this.contains(p))
-						firePluginRemoved(p);
+					
+					firePluginRemoved(p);
 					
 				}
 				
