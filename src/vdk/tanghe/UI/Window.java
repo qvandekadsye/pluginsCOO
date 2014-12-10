@@ -1,6 +1,8 @@
 package vdk.tanghe.UI;
 
 
+import java.awt.Component;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -51,7 +53,10 @@ public class Window implements PluginListener {
 
 	@Override
 	public void pluginRemoved(PluginEvent e) {
-		// TODO Auto-generated method stub
+		Component[] tabMI;
+		tabMI=this.pluginMenu.getComponents();
+		System.out.println(tabMI.length);
+		/*test git*/
 		
 	}
 
