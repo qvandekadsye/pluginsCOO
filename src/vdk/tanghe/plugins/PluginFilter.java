@@ -1,5 +1,6 @@
 package vdk.tanghe.plugins;
 import java.io.File;
+import java.lang.reflect.Constructor;
 
 public class PluginFilter implements java.io.FilenameFilter{
 	
@@ -25,8 +26,47 @@ public class PluginFilter implements java.io.FilenameFilter{
 	@Override
 	public boolean accept(File arg0, String name) {
 		
+		boolean isADotClass = name.endsWith(".class");
+				
+		if(isADotClass) {
+			
+			try {
+				
+				Class<?> plugClass = Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
+				
+				Constructor<?> c = plugClass.getConstructor();
+				Class<?>[] cParameter = c.getParameterTypes();
+				
+				if(cParameter.length!=0)
+					return false;
+				
+				if(plugins.Plugin.class.isAssignableFrom(plugClass))
+					return true;
+				
+				else return false;
+				
+				
+			} catch (ClassNotFoundException e) {
+				
+				// The file does not contain a class
+				return false;
+				
+			} catch (SecurityException e) {
+				
+				return false;
+				
+			} catch (NoSuchMethodException e) {
+				
+				// Thrown if the constructor does not exist.
+				return false;
+				
+				
+				
+			}
+			
+		}
+		else return false;
 		
-		return name.endsWith(".class");
 	}
 	
 
