@@ -14,17 +14,17 @@ public class Main {
 		
 		Window window =new Window();
 		
-/* 		Scanner sc = new Scanner(System.in);
+ 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Dossier à surveiller : ");
 		String path = sc.next();
 		/*
 		 * TODO : Implémenter un selecteur de dossier.
 		 */
-		/*PluginFinder pluginFinder = new PluginFinder(path);
+		PluginFinder pluginFinder = new PluginFinder(path);
 		PluginAddedLogger logger = new PluginAddedLogger();
 		
-		pluginFinder.addPluginListener(logger);
+		pluginFinder.addPluginListener(window);
 		
 		System.out.println("Plugins finder");
 		
@@ -35,7 +35,7 @@ public class Main {
 		
 		for(String s : pluginFinder.getClassFiles())
 			System.out.println("  - " + s); 
-			*/
+			
 		
 	}
 
