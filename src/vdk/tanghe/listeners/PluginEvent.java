@@ -1,16 +1,19 @@
 package vdk.tanghe.listeners;
 
+import plugins.Plugin;
+
 public class PluginEvent {
-	protected String source, name;
+	protected String name;
+	protected Class<? extends Plugin> source;
 	
 	/**
 	 * Constructor
 	 * @param name name of the plugin.
 	 */
-	public PluginEvent(String name)
+	public PluginEvent(String name, Class<? extends Plugin> source)
 	{
 		this.name = name;
-		this.source = "";
+		this.source = source;
 	}
 	
 	public String getName()
@@ -18,7 +21,7 @@ public class PluginEvent {
 		return this.name;
 	}
 	
-	public String getSource() {
+	public Class<? extends Plugin> getSource() {
 		
 		return this.source;
 	}

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
+import plugins.Plugin;
+
 import vdk.tanghe.exception.PluginListenerNotListened;
 import vdk.tanghe.listeners.PluginAddedLogger;
 import vdk.tanghe.listeners.PluginEvent;
@@ -113,10 +115,11 @@ public class PluginFinder {
 	/**
 	 * This method is fired when a plugin is added to the directory
 	 * @param name
+	 * @throws ClassNotFoundException 
 	 */
-	protected void firePluginAdded(String name) {
+	protected void firePluginAdded(String name) throws ClassNotFoundException {
 		
-		PluginEvent e = new PluginEvent(name);
+		PluginEvent e = new PluginEvent(name, (Class<? extends Plugin>) PluginFilter.getClassFromFile(name));
 		
 		for(PluginListener l : listeners) {
 			

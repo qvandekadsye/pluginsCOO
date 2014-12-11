@@ -2,7 +2,7 @@ package vdk.tanghe.plugins;
 import java.io.File;
 import java.lang.reflect.Constructor;
 
-public class PluginFilter implements java.io.FilenameFilter{
+public class PluginFilter implements java.io.FilenameFilter {
 	
 	/**
 	 * Private constructor of PluginFilter
@@ -32,7 +32,7 @@ public class PluginFilter implements java.io.FilenameFilter{
 			
 			try {
 				
-				Class<?> plugClass = Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
+				Class<?> plugClass = getClassFromFile(name);
 				
 				Constructor<?> c = plugClass.getConstructor();
 				Class<?>[] cParameter = c.getParameterTypes();
@@ -66,6 +66,14 @@ public class PluginFilter implements java.io.FilenameFilter{
 			
 		}
 		else return false;
+		
+	}
+	
+	public static Class<?> getClassFromFile(String name) throws ClassNotFoundException {
+		
+		Class<?> plugClass = Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
+		
+		return plugClass;
 		
 	}
 	
