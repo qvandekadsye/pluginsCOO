@@ -132,10 +132,11 @@ public class PluginFinder {
 	/**
 	 * This method is fired when a plugin is removed from the directory
 	 * @param name
+	 * @throws ClassNotFoundException 
 	 */
-	protected void firePluginRemoved(String name) {
+	protected void firePluginRemoved(String name) throws ClassNotFoundException {
 		
-		PluginEvent e = new PluginEvent(name);
+		PluginEvent e = new PluginEvent(name,(Class<? extends Plugin>) PluginFilter.getClassFromFile(name));
 		
 		System.out.println(listeners.size());
 		
@@ -172,7 +173,11 @@ public class PluginFinder {
 					File f = new File(PluginFinder.this.dirName+"/"+p);
 					
 					if(filter.accept(f, p))
-						firePluginAdded(p);
+						try {
+							firePluginAdded(p);
+						} catch (ClassNotFoundException e1) {
+							System.out.println("Could not use the plugin.");
+						}
 					
 				}
 				
@@ -190,7 +195,11 @@ public class PluginFinder {
 					instantMemory.remove(p);
 					
 					
-					firePluginRemoved(p);
+					try {
+						firePluginRemoved(p);
+					} catch (ClassNotFoundException e1) {
+						System.out.println("Could not remove the plugin.");
+					}
 					
 				}
 				
