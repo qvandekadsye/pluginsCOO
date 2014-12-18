@@ -66,7 +66,7 @@ public class Window implements PluginListener {
 			
 			
 			
-			Plugin pluginObject = getPluginAsObject(plugClass);
+			final Plugin pluginObject = getPluginAsObject(plugClass);
 			String nom = pluginObject.getLabel();
 			JMenuItem plugitem=new JMenuItem(nom);
 			
@@ -74,10 +74,14 @@ public class Window implements PluginListener {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					pluginObject.transform(/*Manque l'argument qui doit être this.textpane.getText()*/)
+					
+					String textTransformed = pluginObject.transform(Window.this.textpane.getText());
+					
+					Window.this.textpane.setText(textTransformed);
 					
 				}
-			})
+			});
+			
 			this.pluginMenu.add(plugitem);
 			
 			
