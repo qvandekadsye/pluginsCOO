@@ -2,6 +2,8 @@ package vdk.tanghe.UI;
 
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -30,6 +32,9 @@ public class Window implements PluginListener {
 		this.frame=new JFrame();
 		this.setMenu();
 		this.setwindow();
+		this.textpane=new JTextPane();
+		this.textpane.setSize(600,300);
+		this.frame.add(this.textpane);
 		
 		
 	}
@@ -64,6 +69,15 @@ public class Window implements PluginListener {
 			Plugin pluginObject = getPluginAsObject(plugClass);
 			String nom = pluginObject.getLabel();
 			JMenuItem plugitem=new JMenuItem(nom);
+			
+			plugitem.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					pluginObject.transform(/*Manque l'argument qui doit être this.textpane.getText()*/)
+					
+				}
+			})
 			this.pluginMenu.add(plugitem);
 			
 			
