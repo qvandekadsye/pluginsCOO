@@ -59,12 +59,10 @@ public class Window implements PluginListener {
 		
 		try {
 			
-			allMethods.add(plugClass.getMethod("getLabel", (Class<?>) null));
-			allMethods.add(plugClass.getMethod("transform", String.class));
-			allMethods.add(plugClass.getMethod("helpMessage", (Class<?>) null));
+			
 			
 			Plugin pluginObject = getPluginAsObject(plugClass);
-			String nom = (String) allMethods.get(0).invoke(pluginObject, null);
+			String nom = pluginObject.getLabel();
 			JMenuItem plugitem=new JMenuItem(nom);
 			this.pluginMenu.add(plugitem);
 			
