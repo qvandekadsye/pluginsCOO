@@ -64,8 +64,10 @@ public class Window implements PluginListener {
 			allMethods.add(plugClass.getMethod("helpMessage", (Class<?>) null));
 			
 			Plugin pluginObject = getPluginAsObject(plugClass);
+			String nom = (String) allMethods.get(0).invoke(pluginObject, null);
+			JMenuItem plugitem=new JMenuItem(nom);
+			this.pluginMenu.add(plugitem);
 			
-			pluginObject.
 			
 		} catch (SecurityException e1) {
 			// TODO Auto-generated catch block
