@@ -91,6 +91,7 @@ public class PluginFilter implements java.io.FilenameFilter {
 	
 	public static Class<? extends Plugin> getClassFromFile(String name) throws ClassNotFoundException {
 		
+		@SuppressWarnings("unchecked")
 		Class<? extends Plugin> plugClass = (Class<? extends Plugin>) Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
 		
 		return plugClass;

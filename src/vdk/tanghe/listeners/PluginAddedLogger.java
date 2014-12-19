@@ -36,9 +36,6 @@ public class PluginAddedLogger implements PluginListener {
 	
 	public boolean isKnown(PluginEvent e) {
 		
-		System.out.println("IsKnown : "+pluginsList.contains(e));
-		System.out.println("Nb: "+pluginsList.size());
-		
 		return pluginsList.contains(e);
 		
 	}
