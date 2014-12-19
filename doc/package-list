@@ -1,3 +1,6 @@
+plugin
+plugins
 vdk.tanghe.UI
 vdk.tanghe.exception
+vdk.tanghe.listeners
 vdk.tanghe.plugins
