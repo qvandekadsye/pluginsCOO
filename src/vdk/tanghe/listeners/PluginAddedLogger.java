@@ -3,6 +3,12 @@ package vdk.tanghe.listeners;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to create a log.
+ * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * 
+ *
+ */
 public class PluginAddedLogger implements PluginListener {
 
 	protected List<PluginEvent> pluginsList;
