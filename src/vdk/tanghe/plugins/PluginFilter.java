@@ -6,6 +6,8 @@ import plugins.Plugin;
 
 public class PluginFilter implements java.io.FilenameFilter {
 	
+	private static PluginFilter pluginFilter;
+	
 	/**
 	 * Private constructor of PluginFilter
 	 */
@@ -19,7 +21,9 @@ public class PluginFilter implements java.io.FilenameFilter {
 	 */
 	public static PluginFilter getInstance()
 	{
-		return new PluginFilter();
+		pluginFilter = new PluginFilter();
+		
+		return pluginFilter;
 	}
 
 	/**Method used to check extension's files.
@@ -36,16 +40,7 @@ public class PluginFilter implements java.io.FilenameFilter {
 				
 				Class<?> plugClass = getClassFromFile(name);
 				
-				Constructor<?> c = plugClass.getConstructor();
-				Class<?>[] cParameter = c.getParameterTypes();
-				
-				if(cParameter.length!=0)
-					return false;
-				
-				if(plugins.Plugin.class.isAssignableFrom(plugClass))
-					return true;
-				
-				else return false;
+				return accept(plugClass);
 				
 				
 			} catch (ClassNotFoundException e) {
@@ -57,17 +52,39 @@ public class PluginFilter implements java.io.FilenameFilter {
 				
 				return false;
 				
-			} catch (NoSuchMethodException e) {
-				
-				// Thrown if the constructor does not exist.
-				return false;
-				
-				
-				
 			}
 			
 		}
 		else return false;
+		
+	}
+	
+	public boolean accept(Class<?> theClass) {
+				
+		try {
+			
+			Constructor<?> c;
+			c = theClass.getConstructor();
+			
+			Class<?>[] cParameter = c.getParameterTypes();
+			
+			if(cParameter.length!=0)
+				return false;
+			
+			if(Plugin.class.isAssignableFrom(theClass))
+				return true;
+			
+			else return false;
+			
+		} catch (SecurityException e) {
+			
+			return false;
+			
+		} catch (NoSuchMethodException e) {
+			
+			return false;
+			
+		}
 		
 	}
 	
@@ -78,6 +95,5 @@ public class PluginFilter implements java.io.FilenameFilter {
 		return plugClass;
 		
 	}
-	
 
 }

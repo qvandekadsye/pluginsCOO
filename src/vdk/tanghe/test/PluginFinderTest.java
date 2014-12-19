@@ -44,12 +44,6 @@ public class PluginFinderTest {
 				// TODO Auto-generated method stub
 				
 			}
-			
-			@Override
-			public boolean isKnown(PluginEvent e) {
-				// TODO Auto-generated method stub
-				return false;
-			}
 		});
 		assertEquals(1,listenersTest.size());
 	}
