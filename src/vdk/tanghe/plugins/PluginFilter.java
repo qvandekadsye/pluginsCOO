@@ -11,10 +11,7 @@ public class PluginFilter implements java.io.FilenameFilter {
 	/**
 	 * Private constructor of PluginFilter
 	 */
-	private PluginFilter()
-	{
-		
-	}
+	private PluginFilter() {	}
 	
 	/**
 	 * @return An instance of PluginFilter.
