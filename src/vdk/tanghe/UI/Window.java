@@ -17,19 +17,16 @@ import vdk.tanghe.listeners.*;
 
 /**
  * The main window.
- * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * @author Quentin Van de Kadsye and Jerome Tanghe.
  * 
  *
  */
 public class Window implements PluginListener {
-	JFrame frame;
-	/**
-	 * This windows will be open when the program will open.
-	 */
-	JMenuBar menuBar;
-	JMenu pluginMenu;
-	JPanel panel;
-	JTextPane textpane;
+	protected JFrame frame;
+	protected JMenuBar menuBar;
+	protected JMenu pluginMenu;
+	protected JPanel panel;
+	protected JTextPane textpane;
 	
 	/**
 	 * Constructor.
@@ -122,7 +119,7 @@ public class Window implements PluginListener {
 		
 	}
 
-	private Plugin getPluginAsObject(Class<? extends Plugin> plugClass) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	protected Plugin getPluginAsObject(Class<? extends Plugin> plugClass) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		
 		return plugClass.getConstructor((Class<?>[]) null).newInstance((Object[]) null);
 		

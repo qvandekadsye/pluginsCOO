@@ -2,7 +2,7 @@
  * 
  */
 /**
- * Quentin Van de Kadsye and Jérôme Tanghe.
+ * Quentin Van de Kadsye and Jerome Tanghe.
  * The main package.
  *
  */

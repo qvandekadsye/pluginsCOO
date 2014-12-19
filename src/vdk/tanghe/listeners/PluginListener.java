@@ -2,7 +2,7 @@ package vdk.tanghe.listeners;
 
 /**
  * Interface in order to manage behaviors when a plugin is added or removed.
- *
+ * @author Quentin Van de Kadsye and Jerome Tanghe
  */
 public interface PluginListener {
 	

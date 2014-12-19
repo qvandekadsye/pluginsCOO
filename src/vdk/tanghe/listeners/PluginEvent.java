@@ -4,7 +4,7 @@ import plugins.Plugin;
 
 /**
  * Class of event.
- * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * @author Quentin Van de Kadsye and Jerome Tanghe.
  * 
  *
  */

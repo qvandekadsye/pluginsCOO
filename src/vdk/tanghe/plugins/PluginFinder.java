@@ -15,7 +15,7 @@ import vdk.tanghe.listeners.PluginEvent;
 import vdk.tanghe.listeners.PluginListener;
 
 /**
- * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * @author Quentin Van de Kadsye and Jerome Tanghe.
  * The <code>PluginFinder</code> class looks for the new files stored in the
  * plugins directory and perform them.
  * To launch the surveillance of the directory, you must call the <code>start()</code>

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Class used to create a log.
- * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * @author Quentin Van de Kadsye and Jerome Tanghe.
  * 
  *
  */
