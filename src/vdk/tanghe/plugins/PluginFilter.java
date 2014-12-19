@@ -21,7 +21,8 @@ public class PluginFilter implements java.io.FilenameFilter {
 	 */
 	public static PluginFilter getInstance()
 	{
-		pluginFilter = new PluginFilter();
+		if(pluginFilter == null)
+			pluginFilter = new PluginFilter();
 		
 		return pluginFilter;
 	}
