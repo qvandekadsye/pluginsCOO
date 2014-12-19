@@ -1,7 +1,4 @@
-Tanghe :
-- TimerActionListener
+Répartition des tests unitaires :
 
-Van de Kadsye :
-- FilenameFilter → déjà implémenté dans java.io.File ?
-- PluginFinder
-- PluginFilter
+Tanghe : les classes du package vdk.tanghe.listeners
+Van de Kadsye : les classes du package vdk.tanghe.plugins + la classe Window
