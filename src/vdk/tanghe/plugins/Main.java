@@ -1,7 +1,5 @@
 package vdk.tanghe.plugins;
 
-import java.util.Scanner;
-
 import vdk.tanghe.UI.*;
 
 public class Main {
@@ -11,15 +9,16 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
+		if(args.length == 0) {
+ 			System.out.println("Missing argument: please tell me which folder I must look!");
+ 			System.out.println("Usage: ./plugin.jar <folder>");
+ 			return;
+ 		}
+		
 		Window window = new Window();
+ 		
+		String path = args[0];
 		
- 		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("Dossier à surveiller : ");
-		String path = sc.next();
-		/*
-		 * TODO : Implémenter un selecteur de dossier.
-		 */
 		PluginFinder pluginFinder = new PluginFinder(path);
 		
 		pluginFinder.addPluginListener(window);
