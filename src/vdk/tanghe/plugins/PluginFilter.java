@@ -4,6 +4,11 @@ import java.lang.reflect.Constructor;
 
 import plugins.Plugin;
 
+/**
+ * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * Class that sorts the plugins.
+ *
+ */
 public class PluginFilter implements java.io.FilenameFilter {
 	
 	private static PluginFilter pluginFilter;
@@ -60,6 +65,11 @@ public class PluginFilter implements java.io.FilenameFilter {
 		
 	}
 	
+	/**
+	 * This fuction check if the plugin is correct.
+	 * @param theClass The class object whom will take the test.
+	 * @return if the Class object have passed the test or not.
+	 */
 	public boolean accept(Class<?> theClass) {
 				
 		try {

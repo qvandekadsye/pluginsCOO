@@ -2,7 +2,7 @@
  * Package managing User Interface
  */
 /**
- * @author vandekadsye
+ * @author Quentin Van de Kadsye and Jérôme Tanghe.
  *
  */
 package vdk.tanghe.UI;

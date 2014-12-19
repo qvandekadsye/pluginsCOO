@@ -15,13 +15,25 @@ import plugins.Plugin;
 
 import vdk.tanghe.listeners.*;
 
+/**
+ * The main window.
+ * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * 
+ *
+ */
 public class Window implements PluginListener {
 	JFrame frame;
+	/**
+	 * This windows will be open when the program will open.
+	 */
 	JMenuBar menuBar;
 	JMenu pluginMenu;
 	JPanel panel;
 	JTextPane textpane;
 	
+	/**
+	 * Constructor.
+	 */
 	public Window()
 	{
 		this.frame=new JFrame();
@@ -34,6 +46,9 @@ public class Window implements PluginListener {
 		
 	}
 
+	/**
+	 * Setting the window's menu.
+	 */
 	private void setMenu() 
 	{
 		this.menuBar=new JMenuBar();
@@ -43,6 +58,9 @@ public class Window implements PluginListener {
 		
 	}
 
+	/**
+	 * Setting the window.
+	 */
 	private void setwindow() 
 	{
 		this.frame.setTitle("TP Plugin");
@@ -51,6 +69,9 @@ public class Window implements PluginListener {
 		
 	}
 
+	/** This function set the window behavior when a new plugin is detected.
+	 * @see vdk.tanghe.listeners.PluginListener#pluginAdded(vdk.tanghe.listeners.PluginEvent)
+	 **/
 	@Override
 	public void pluginAdded(PluginEvent e) {
 		Class<? extends Plugin> plugClass=e.getSource();
@@ -80,22 +101,22 @@ public class Window implements PluginListener {
 			
 			
 		} catch (SecurityException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		
@@ -107,6 +128,9 @@ public class Window implements PluginListener {
 		
 	}
 
+	/**(This function set the window behavior when a plugin is removed.
+	 * @see vdk.tanghe.listeners.PluginListener#pluginRemoved(vdk.tanghe.listeners.PluginEvent)
+	 */
 	@Override
 	public void pluginRemoved(PluginEvent e) {
 				

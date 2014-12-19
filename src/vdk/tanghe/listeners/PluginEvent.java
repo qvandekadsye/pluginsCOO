@@ -2,6 +2,12 @@ package vdk.tanghe.listeners;
 
 import plugins.Plugin;
 
+/**
+ * Class of event.
+ * @author Quentin Van de Kadsye and Jérôme Tanghe.
+ * 
+ *
+ */
 public class PluginEvent {
 	protected String name;
 	protected Class<? extends Plugin> source;
