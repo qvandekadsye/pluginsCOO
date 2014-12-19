@@ -2,6 +2,8 @@ package vdk.tanghe.plugins;
 import java.io.File;
 import java.lang.reflect.Constructor;
 
+import plugins.Plugin;
+
 public class PluginFilter implements java.io.FilenameFilter {
 	
 	/**
@@ -69,9 +71,9 @@ public class PluginFilter implements java.io.FilenameFilter {
 		
 	}
 	
-	public static Class<?> getClassFromFile(String name) throws ClassNotFoundException {
+	public static Class<? extends Plugin> getClassFromFile(String name) throws ClassNotFoundException {
 		
-		Class<?> plugClass = Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
+		Class<? extends Plugin> plugClass = (Class<? extends Plugin>) Class.forName("plugin."+name.substring(0, name.length()-".class".length()));
 		
 		return plugClass;
 		

@@ -17,7 +17,5 @@ public interface PluginListener {
 	 * @param e The plugin.
 	 */
 	public void pluginRemoved(PluginEvent e);
-	
-	public boolean isKnown(PluginEvent e);
 
 }

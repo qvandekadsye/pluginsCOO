@@ -136,13 +136,10 @@ public class PluginFinder {
 	 */
 	protected void firePluginRemoved(String name) throws ClassNotFoundException {
 		
-		PluginEvent e = new PluginEvent(name,(Class<? extends Plugin>) PluginFilter.getClassFromFile(name));
-		
-		System.out.println(listeners.size());
-		
+		PluginEvent e = new PluginEvent(name);
+				
 		for(PluginListener l : listeners) {
-			if(l.isKnown(e))
-				l.pluginRemoved(e);
+			l.pluginRemoved(e);
 		}
 		
 	}

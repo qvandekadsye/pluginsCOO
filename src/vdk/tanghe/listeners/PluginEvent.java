@@ -16,6 +16,11 @@ public class PluginEvent {
 		this.source = source;
 	}
 	
+	public PluginEvent(String name) {
+		this.name = name;
+		this.source = null;
+	}
+
 	public String getName()
 	{
 		return this.name;

@@ -1,14 +1,9 @@
 package vdk.tanghe.UI;
 
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -59,16 +54,15 @@ public class Window implements PluginListener {
 	@Override
 	public void pluginAdded(PluginEvent e) {
 		Class<? extends Plugin> plugClass=e.getSource();
-		
-		List<Method> allMethods = new ArrayList<Method>();
-		
+				
 		try {
 			
 			
 			
 			final Plugin pluginObject = getPluginAsObject(plugClass);
-			String nom = pluginObject.getLabel();
-			JMenuItem plugitem=new JMenuItem(nom);
+			String label = pluginObject.getLabel();
+			JMenuItem plugitem = new JMenuItem(label);
+			plugitem.setName(e.getName());
 			
 			plugitem.addActionListener(new ActionListener() {
 				
@@ -109,23 +103,26 @@ public class Window implements PluginListener {
 
 	private Plugin getPluginAsObject(Class<? extends Plugin> plugClass) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		
-		return plugClass.getConstructor(null).newInstance(null);
+		return plugClass.getConstructor((Class<?>[]) null).newInstance((Object[]) null);
 		
 	}
 
 	@Override
 	public void pluginRemoved(PluginEvent e) {
-		Component[] tabMI;
-		tabMI=this.pluginMenu.getComponents();
-		System.out.println(tabMI.length);
-		/*test git*/
+				
+		for(int i = 0; i < this.pluginMenu.getItemCount(); i++) {
+			
+			JMenuItem menuItem = this.pluginMenu.getItem(i);
+			
+			if(menuItem.getName().equals(e.getName())) {
+				
+				this.pluginMenu.remove(i);
+				System.out.println("		Removed from the menu.");
+				
+			}
+			
+		}
 		
-	}
-
-	@Override
-	public boolean isKnown(PluginEvent e) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

@@ -2,7 +2,6 @@ package vdk.tanghe.plugins;
 
 import java.util.Scanner;
 
-import vdk.tanghe.listeners.PluginAddedLogger;
 import vdk.tanghe.UI.*;
 
 public class Main {
@@ -12,7 +11,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		Window window =new Window();
+		Window window = new Window();
 		
  		Scanner sc = new Scanner(System.in);
 		
@@ -22,7 +21,6 @@ public class Main {
 		 * TODO : Implémenter un selecteur de dossier.
 		 */
 		PluginFinder pluginFinder = new PluginFinder(path);
-		PluginAddedLogger logger = new PluginAddedLogger();
 		
 		pluginFinder.addPluginListener(window);
 		

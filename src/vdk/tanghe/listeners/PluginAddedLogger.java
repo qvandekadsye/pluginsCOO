@@ -29,15 +29,16 @@ public class PluginAddedLogger implements PluginListener {
 	@Override
 	public void pluginRemoved(PluginEvent e) {
 		System.out.println(e.getName()+" removed !");
-		pluginsList.remove(e);
+		if(isKnown(e))
+			pluginsList.remove(e);
 		
 	}
 	
-	@Override
 	public boolean isKnown(PluginEvent e) {
 		
 		System.out.println("IsKnown : "+pluginsList.contains(e));
 		System.out.println("Nb: "+pluginsList.size());
+		
 		return pluginsList.contains(e);
 		
 	}
